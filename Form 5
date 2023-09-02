@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+int n;
+vector<int> moves = {1, 3, 4};
+int dp[100100];
+int rec(int x)
+{
+    if (x == 0)
+    {
+        return 0;
+    }
+    if (dp[x] != -1)
+    {
+        return dp[x];
+    }
+    int ans = 0;
+    for (auto v : moves)
+    {
+        if (v <= x && rec(x - v) == 0)
+        {
+            ans = 1;
+            break;
+        }
+    }
+    return dp[x] = ans;
+}
+
+void solve()
+{
+    cin >> n;
+    memset(dp, -1, sizeof(dp));
+    cout << rec(n) << endl;
+}
+signed main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+}
